@@ -4,7 +4,13 @@
 > 
 > We are open sourcing this repository so that people can copy it if they want to continue using it. The source code will be available at: http://go.atlassian.com/connect-inspector
 
-To use this tool: http://go.atlassian.com/connect-inspector
+> **⚠️ ATLASSIAN CONNECT END OF SUPPORT NOTICE**
+>
+> Atlassian Connect will reach end of support in December 2024. [Learn more about the end of support timeline](https://www.atlassian.com/blog/developer/announcing-connect-end-of-support-timeline-and-next-steps).
+>
+> **Migrate to Forge:** You should already be migrating to [Atlassian Forge](https://developer.atlassian.com/platform/adopting-forge-from-connect/). Forge provides similar functionality through event triggers:
+> - [Jira Events](https://developer.atlassian.com/platform/forge/events-reference/jira/)
+> - [Confluence Events](https://developer.atlassian.com/platform/forge/events-reference/confluence/)
 
 The Atlassian Connect inspector allows you to generate temporary add-ons that you can install into you [Cloud Development Environment][1] and use to inspect the:
 
