@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.min.js"></script>
+      <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.9.4/css/aui.css" media="all">
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+      <script src="//aui-cdn.atlassian.com/aui-adg/5.9.4/js/aui.js"></script>
+      <script src="//aui-cdn.atlassian.com/aui-adg/5.9.4/js/aui-datepicker.js"></script>
+      <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.9.4/css/aui-experimental.css" media="all">
+      <script src="//aui-cdn.atlassian.com/aui-adg/5.9.4/js/aui-experimental.js"></script>
+      <script src="//aui-cdn.atlassian.com/aui-adg/5.9.4/js/aui-soy.js"></script>
+
+      <script src="/static/js/app/addon.js" type="text/javascript"></script>
+      <script type="text/javascript">require(['app/addon']);</script>
+
+      <link rel="stylesheet" type="text/css" href="/static/css/all.css">
+
+      <meta name="addon-key" content="{{addonKey}}">
+
+      {{=<% %>=}}
+      <script id="log-line" type="x-tmpl-mustache">
+         <div class="log-line">
+           <span class="aui-lozenge aui-lozenge-subtle timestamp">{{prettyTimestamp}}</span>
+           <span class="aui-lozenge aui-lozenge-success method">{{method}}</span> 
+           <span class="aui-lozenge aui-lozenge-subtle {{#jwtToken}}aui-lozenge-success{{/jwtToken}} {{^jwtToken}}aui-lozenge-error{{/jwtToken}} has-jwt">JWT</span>
+           {{tag}} 
+           {{#jwtToken}}
+           <br /><span class="aui-icon aui-icon-small aui-iconfont-collapsed open-jwt">Not showing</span><strong class="open-jwt">JWT Token</strong>
+           <div class="jwt-data hidden">
+           <strong>Header</strong>
+           <code><pre>{{prettyHeader}}</pre></code>
+           <strong>Payload</strong>
+           <code><pre>{{prettyPayload}}</pre></code>
+           <strong>Signature</strong>
+           <code><pre>{{sig}}</pre></code>
+           </div>
+           {{/jwtToken}}
+           <br /><span class="aui-icon aui-icon-small aui-iconfont-collapsed open-query-params">Not showing</span><strong class="open-query-params">Query params</strong>
+           <div class="query-params hidden">
+             <table class="aui">
+               {{#query}}
+               <tr>
+                  <td>{{key}}</td>
+                  <td>{{value}}</td>
+               </tr>
+               {{/query}}
+             </table>
+           </div>
+           <br /><span class="aui-icon aui-icon-small aui-iconfont-collapsed open-body">Not showing</span><strong class="open-body">Body</strong>
+           <div class="body hidden"><code><pre>{{prettyBody}}</pre></code></div>
+         </div>
+      </script>
+      <%={{ }}=%>
+   </head>
+   <body class="page-addon">
+    <div id="page">
+      <header id="header" role="banner">
+        <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+          <div class="aui-header-inner">
+            <div class="aui-header-primary">
+              <h1 id="logo" class="aui-header-logo aui-header-logo-custom"><a href="/"><span class="aui-header-logo-text">Connect inspector</span></a></h1>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <div class="aui-page-panel">
+         <div class="aui-page-panel-inner">
+            <div class="hidden" id="page-markdown-content">{{{markdownContent}}}</div>
+            <section id="content" class="aui-page-panel-content page-content">
+               <div id="addon-actions" class="section">
+                  <span id="addon-status" class="aui-lozenge aui-lozenge-success">Add-on active</span>
+                  <button id="copy-descriptor" class="aui-button clipboard tooltip"
+                  data-clipboard-text="{{hostUrl}}/resources/{{addonKey}}/atlassian-connect.json"
+                  title="Copied!">Copy descriptor to clipboard</button>
+                  <a href="{{hostUrl}}/resources/{{addonKey}}/atlassian-connect.json"><span class="aui-icon aui-icon-small aui-iconfont-link" original-title="link">Connect descriptor</span></a>
+               </div>
+               <div id="addon-logs" class="section"></div>
+               <div id="no-logs" class="section hidden">
+                  <div class="aui-message aui-message-info">
+                     <p class="title">
+                        <strong>I have recieved no log messages yet.</strong>
+                     </p>
+                     <p>Please copy the descriptor link above and
+                     install me in an Atlassian Cloud JIRA or Confluence to see the lifecycle and 
+                     webhook events come through.</p>
+                  </div>
+               </div>
+            </section>
+         </div>
+      </div>
+
+      <footer id="footer" role="contentinfo">
+         <section class="footer-body">
+            <ul>
+               <li><a target="_blank" href="https://developer.atlassian.com/static/connect/docs/latest/index.html">Atlassian Connect</a></li>
+            </ul>
+            <div id="footer-logo"><a href="http://www.atlassian.com/" target="_blank">Atlassian</a></div>
+         </section>
+      </footer>
+    </div>
+  </body>
+</html>

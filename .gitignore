@@ -1,0 +1,14 @@
+# Temp files
+.*.sw[a-p]
+*~
+
+# Node
+/node_modules
+
+# Generated files
+/static-js
+/static-css
+.idea/*
+
+# Nebulae
+.nebulae/

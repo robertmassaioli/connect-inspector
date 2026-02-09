@@ -1,0 +1,172 @@
+openapi: 3.0.0
+info:
+  title: Connect Inspector API
+  description: API for the Connect Inspector service
+  version: 1.0.0
+paths:
+  /heartbeat:
+    get:
+      summary: Check if service is up
+      responses:
+        "200":
+          description: Service is up
+  /page/start:
+    get:
+      summary: Render the start page
+      responses:
+        "200":
+          description: Start page rendered
+  /page/addon:
+    get:
+      summary: Render the addon page
+      parameters:
+        - name: addonKey
+          in: query
+          description: The key of the addon
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Addon page rendered
+  /addon:
+    post:
+      summary: Create a new addon
+      responses:
+        "200":
+          description: Addon created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  addonKey:
+                    type: string
+  /addon/{addonKey}:
+    get:
+      summary: Check if the addon is active
+      parameters:
+        - name: addonKey
+          in: path
+          required: true
+          description: The key of the addon
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Addon status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  active:
+                    type: boolean
+    delete:
+      summary: Delete an addon
+      parameters:
+        - name: addonKey
+          in: path
+          required: true
+          description: The key of the addon
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Addon deleted successfully
+  /addon/{addonKey}/logs:
+    get:
+      summary: Get logs for a specific addon
+      parameters:
+        - name: addonKey
+          in: path
+          required: true
+          description: The key of the addon
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Logs retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  addonKey:
+                    type: string
+                  logs:
+                    type: array
+                    items:
+                      type: object
+  /resources/{addonKey}/atlassian-connect.json:
+    get:
+      summary: Get the atlassian-connect descriptor for an addon
+      parameters:
+        - name: addonKey
+          in: path
+          required: true
+          description: The key of the addon
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Descriptor retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+  /resources/{addonKey}/log-save/{tag}:
+    all:
+      summary: Save logs for an addon with a specific tag
+      parameters:
+        - name: addonKey
+          in: path
+          required: true
+          description: The key of the addon
+          schema:
+            type: string
+        - name: tag
+          in: path
+          required: true
+          description: The tag for the log entry
+          schema:
+            type: string
+      requestBody:
+        description: Log data
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "204":
+          description: Log entry saved
+        "404":
+          description: Addon not found
+components:
+  schemas:
+    Log:
+      type: object
+      properties:
+        id:
+          type: string
+        tag:
+          type: string
+        method:
+          type: string
+        headers:
+          type: object
+        query:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+        body:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
