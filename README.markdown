@@ -6,7 +6,7 @@
 
 > **⚠️ ATLASSIAN CONNECT END OF SUPPORT NOTICE**
 >
-> Atlassian Connect will reach end of support in December 2024. [Learn more about the end of support timeline](https://www.atlassian.com/blog/developer/announcing-connect-end-of-support-timeline-and-next-steps).
+> Atlassian Connect will reach end of support in December 2026. [Learn more about the end of support timeline](https://www.atlassian.com/blog/developer/announcing-connect-end-of-support-timeline-and-next-steps).
 >
 > **Migrate to Forge:** You should already be migrating to [Atlassian Forge](https://developer.atlassian.com/platform/adopting-forge-from-connect/). Forge provides similar functionality through event triggers:
 > - [Jira Events](https://developer.atlassian.com/platform/forge/events-reference/jira/)
